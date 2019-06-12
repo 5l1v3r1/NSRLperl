@@ -1,0 +1,19 @@
+Tue Sep 13 16:50:20 EDT 2005 -- JT
+
+The contents of this directory serve as a convenient way to install the
+prerequisites of the NSRL hashing code into the Knoppix environment. They
+should not appear in the Knoppix distro itself.
+
+The directory contains:
+
+README -	 This file.
+
+NSRLInstaller -  a simple shell script to install the Perl modules
+		 required by the NSRL hashing code. CPAN and NSRL modules are
+		 installed, in the correct order.
+
+		 You need to be root to run this successfully (so that the
+		 "make install" commands for the Perl modules will succeed).
+
+DistroMods -	 The CPAN and NSRL Perl modules required by the hashing code,
+		 in two separate subdirectories.

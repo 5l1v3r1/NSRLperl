@@ -1,0 +1,45 @@
+#!/bin/sh
+
+topdir=`pwd`
+srcdir="$topdir/DistroMods"
+tmpdir="$topdir/tmp"
+CPANdir="$srcdir/CPAN"
+NSRLdir="$srcdir/NSRL"
+
+mkdir $tmpdir
+
+echo "**************************"
+echo "Installing CPAN modules..."
+
+for file in `cat $CPANdir/module.list`
+  do
+	cd $tmpdir
+	tar zxf "$CPANdir/$file"
+	dir=`echo $file|sed -e "s/\.tar\.gz//g"`
+	echo "	$dir"
+	installdir="$tmpdir/$dir"
+	cd $installdir
+	perl Makefile.PL
+	make
+	make test
+	make install
+done
+
+echo "Installing NSRL modules..."
+
+for file in `cat $NSRLdir/module.list`
+  do
+	cd $tmpdir
+	tar zxf "$NSRLdir/$file"
+	dir=`echo $file|sed -e "s/\.tar\.gz//g"`
+	echo "  $dir"
+	installdir="$tmpdir/$dir"
+	cd $installdir
+	perl Makefile.PL
+	make
+	make test
+	make install
+done
+echo "**************************"
+
+rm -rf $tmpdir
